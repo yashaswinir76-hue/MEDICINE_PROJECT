@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Medicine</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg, #f8ffae, #43c6ac);
+background-size:400% 400%;
+animation: bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.box{
+background: rgba(255,255,255,0.75);
+backdrop-filter: blur(12px);
+padding:35px;
+border-radius:18px;
+width:360px;
+text-align:center;
+color:#2c3e50;
+box-shadow:0 10px 35px rgba(0,0,0,0.15);
+}
+
+h2{
+margin-bottom:8px;
+}
+
+p{
+margin-bottom:18px;
+font-size:14px;
+opacity:0.8;
+}
+
+input{
+width:100%;
+padding:11px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+outline:none;
+}
+
+input:focus{
+border-color:#43c6ac;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#43c6ac;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+margin-top:10px;
+}
+
+button:hover{
+background:#2ecc71;
+transform:scale(1.03);
+}
+
+a{
+display:block;
+margin-top:12px;
+color:#2c3e50;
+text-decoration:none;
+font-size:14px;
+}
+
+a:hover{
+text-decoration:underline;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Upload Medicine</h2>
+<p>Scan & store medicine details using AI</p>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+
+<!-- IMAGE -->
+<input type="file" name="file" accept="image/*" capture="environment" required>
+
+<!-- MANUAL OVERRIDE -->
+<input type="text" name="manual_name" placeholder="Medicine Name (optional)">
+
+<input type="date"
+       name="manual_expiry"
+       required>
+
+<!-- STOCK -->
+<input type="number" name="stock" placeholder="Stock Quantity" min="0" required>
+
+<button type="submit">Upload & Process</button>
+
+</form>
+
+<a href="/dashboard">Go to Dashboard</a>
+<a href="/logout">Logout</a>
+
+</div>
+
+</body>
+</html>

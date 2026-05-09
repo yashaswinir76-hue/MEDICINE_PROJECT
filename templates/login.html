@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicine System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background: linear-gradient(135deg, #00c6ff, #0072ff, #00ff99);
+background-size:400% 400%;
+animation: bgMove 10s ease infinite;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.box{
+background: rgba(255,255,255,0.12);
+backdrop-filter: blur(20px);
+border-radius:20px;
+padding:30px;
+width:340px;
+text-align:center;
+color:white;
+box-shadow:0 8px 40px rgba(0,0,0,0.3);
+}
+
+h2{
+margin-bottom:15px;
+}
+
+input{
+width:90%;
+padding:12px;
+margin:8px;
+border:none;
+border-radius:8px;
+outline:none;
+}
+
+button{
+width:95%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#00c6ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#0072ff;
+transform:scale(1.05);
+}
+
+.toggle{
+margin-top:10px;
+font-size:14px;
+cursor:pointer;
+user-select:none;
+}
+
+/* HIDE */
+.hidden{
+display:none;
+}
+
+/* ALERTS */
+.error{
+color:#ff4d4d;
+font-size:14px;
+margin-bottom:10px;
+font-weight:bold;
+}
+
+.success{
+color:#00ff99;
+font-size:14px;
+margin-bottom:10px;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2 id="title">Register</h2>
+
+<!-- ERROR MESSAGE -->
+{% if error %}
+<p class="error">
+{{ error }}
+</p>
+{% endif %}
+
+<!-- SUCCESS MESSAGE -->
+{% if success %}
+<p class="success">
+{{ success }}
+</p>
+
+<script>
+window.onload = function(){
+
+    // automatically switch to login form
+    document.getElementById("registerForm")
+        .classList.add("hidden");
+
+    document.getElementById("loginForm")
+        .classList.remove("hidden");
+
+    document.getElementById("title")
+        .innerText = "Login";
+
+    document.querySelector(".toggle")
+        .innerText = "Don't have an account? Register";
+}
+</script>
+
+{% endif %}
+
+<!-- REGISTER FORM -->
+<form id="registerForm"
+action="/register"
+method="post">
+
+<input
+name="name"
+placeholder="Name"
+required>
+
+<input
+name="email"
+type="email"
+placeholder="Email"
+required>
+
+<input
+name="phone"
+placeholder="Phone"
+required>
+
+<input
+name="password"
+type="password"
+placeholder="Password"
+required>
+
+<button type="submit">
+
+Register
+
+</button>
+
+</form>
+
+<!-- LOGIN FORM -->
+<form id="loginForm"
+class="hidden"
+action="/login"
+method="post">
+
+<input
+name="email"
+type="email"
+placeholder="Email"
+required>
+
+<input
+name="password"
+type="password"
+placeholder="Password"
+required>
+
+<button type="submit">
+
+Login
+
+</button>
+
+</form>
+
+<!-- TOGGLE -->
+<p class="toggle"
+onclick="toggleForm()">
+
+Already have an account? Login
+
+</p>
+
+</div>
+
+<script>
+
+function toggleForm() {
+
+    const registerForm =
+        document.getElementById("registerForm");
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const title =
+        document.getElementById("title");
+
+    const toggleText =
+        document.querySelector(".toggle");
+
+    const isLoginVisible =
+        !loginForm.classList.contains("hidden");
+
+    if (isLoginVisible) {
+
+        // SHOW REGISTER
+        loginForm.classList.add("hidden");
+
+        registerForm.classList.remove("hidden");
+
+        title.innerText = "Register";
+
+        toggleText.innerText =
+            "Already have an account? Login";
+
+    } else {
+
+        // SHOW LOGIN
+        registerForm.classList.add("hidden");
+
+        loginForm.classList.remove("hidden");
+
+        title.innerText = "Login";
+
+        toggleText.innerText =
+            "Don't have an account? Register";
+    }
+}
+
+</script>
+
+</body>
+</html>
